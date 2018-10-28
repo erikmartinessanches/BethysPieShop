@@ -66,18 +66,18 @@ namespace BethysPieShop
 
 
 
-            services.AddAuthentication(
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme
     //options => {
     //    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     //    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     //    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     //}
     )
-    .AddFacebook("signin-facebook", facebookOptions =>
-    {
-        facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
-        facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-    })
+    //.AddFacebook("signin-facebook", facebookOptions =>
+    //{
+    //    facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+    //    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+    //})
     .AddCookie();
         }
 
@@ -93,12 +93,12 @@ namespace BethysPieShop
                 app.UseHsts();
             }
 
-            app.UseAuthentication();
-            app.UseHttpsRedirection();
-            app.UseStatusCodePages();
+            
+            //app.UseHttpsRedirection();
+            //app.UseStatusCodePages();
 
             app.UseStaticFiles();
-            
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

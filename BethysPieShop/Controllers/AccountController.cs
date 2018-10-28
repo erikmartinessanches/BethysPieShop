@@ -25,6 +25,7 @@ namespace BethysPieShop.Controllers
 
         public IActionResult Login()
         {
+            ViewBag.CurrentPage = "Login";
             return View();
         }
 
@@ -57,6 +58,7 @@ namespace BethysPieShop.Controllers
 
         public IActionResult Register()
         {
+            ViewBag.CurrentPage = "Register";
             return View();
         }
 

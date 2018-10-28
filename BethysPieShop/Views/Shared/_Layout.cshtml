@@ -1,49 +1,118 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
-
-<!DOCTYPE html>
-
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/content/site.css" />
+
+
+
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-controller="Home" asp-action="Index" class="navbar-brand">Bethany's Pie Shop</a></li>
-                    <li><a asp-controller="Feedback" asp-action="Index">Feedback</a></li>
-                    @if (User.Identity.IsAuthenticated)
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a asp-controller="Home" asp-action="Index" class="navbar-brand">Bethany's Pie Shop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                @if (ViewBag.CurrentPage == "Home")
+                {
+                    <li class="nav-item active">
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                }
+
+
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (ViewBag.CurrentPage == "Feedback")
                     {
-                        <li><a asp-area="" asp-controller="Account" asp-action="Logout">Log out buddy</a></li>
+                        <li class="nav-item active">
+                            <a asp-controller="Feedback" asp-action="Index" class="nav-link">Feedback</a>
+                        </li>
                     }
                     else
                     {
-                        <li><a id="registerLink" asp-controller="Account" asp-action="Register">Register</a></li>
-                        <li><a id="loginLink" asp-controller="Account" asp-action="Login">Log in</a></li>
+                        <li class="nav-item">
+                            <a asp-controller="Feedback" asp-action="Index" class="nav-link">Feedback</a>
+                        </li>
                     }
 
-                </ul>
 
 
-            </div>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Account" asp-action="Logout" class="nav-link">Log out</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a asp-controller="Feedback" asp-action="Index" class="nav-link disabled">Feedback</a>
+                    </li>
+                    @if (ViewBag.CurrentPage == "Register")
+                    {
+                        <li class="nav-item active">
+                            <a id="registerLink" asp-controller="Account" asp-action="Register" class="nav-link">Register</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a id="registerLink" asp-controller="Account" asp-action="Register" class="nav-link">Register</a>
+                        </li>
+                    }
+                    @if (ViewBag.CurrentPage == "Login")
+                    {
+                        <li class="nav-item active">
+                            <a id="loginLink" asp-controller="Account" asp-action="Login" class="nav-link">Log in</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a id="loginLink" asp-controller="Account" asp-action="Login" class="nav-link">Log in</a>
+                        </li>
+                    }
+                }
+            </ul>
         </div>
     </nav>
 
-    <div class="container body-content">
-        <div class="row">
-            @RenderBody()
-
+    <main role="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <img class="img-responsive" src="~/images/bethanylogo.png" alt="Bethany's Pie Shop Logo" />
+                </div>
+                <div class="col-md-9">
+                    @RenderBody()
+                </div>
+            </div>
         </div>
-        
-    </div>
+
+    </main>
+
+    <script src="~/lib/jquery/jquery.slim.min.js"></script>
+    <script src="~/lib/popper.js/umd/popper.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

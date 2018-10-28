@@ -20,6 +20,7 @@ namespace BethysPieShop.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.CurrentPage = "Feedback";
             return View();
         }
 

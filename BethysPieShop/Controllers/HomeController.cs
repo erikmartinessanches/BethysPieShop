@@ -24,6 +24,7 @@ namespace BethysPieShop.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.CurrentPage = "Home";
             var pies = _pieRepository.GetAllPies().OrderBy(p => p.Name);
             var homeViewModel = new HomeViewModel()
             {
