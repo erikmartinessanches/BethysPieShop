@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BethysPieShop.Models;
+using BethysPieShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BethysPieShop.Controllers
@@ -23,11 +24,16 @@ namespace BethysPieShop.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Title = "Pie Overview";
+            
 
             var pies = _pieRepository.GetAllPies().OrderBy(p => p.Name);
 
-            return View(pies);
+            var homeViewModel = new HomeViewModel()
+            {
+                Title = "Welcome to Bethy's Pie Shop",
+                Pies = pies.ToList()
+            };
+            return View(homeViewModel);
         }
     }
 }
