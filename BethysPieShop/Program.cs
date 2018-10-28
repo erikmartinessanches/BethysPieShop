@@ -18,7 +18,7 @@ namespace BethysPieShop
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            WebHost.CreateDefaultBuilder(args) //A file called appsettings.json is automatically going to be checked for configuration information, that will make our db connection string known. Cool.
                 .UseStartup<Startup>();
     }
 }
