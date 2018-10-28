@@ -6,6 +6,7 @@ using BethysPieShop.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,13 @@ namespace BethysPieShop
         {
             services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            /* Store the info using the AppDbContext. Using identity, we don't have to write quiries...
+             * We're poining out the data store.
+             */
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
+
             services.AddTransient<IPieRepository, PieRepository>(); //Whenever an IPieRepository is requested, give an MockPieRepository transitively (new on every request).
             services.AddTransient<IFeedbackRepository, FeedbackRepository>();
             services.AddMvc();
@@ -43,6 +51,7 @@ namespace BethysPieShop
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
