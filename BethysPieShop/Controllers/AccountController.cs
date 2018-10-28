@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BethysPieShop.ViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +27,7 @@ namespace BethysPieShop.Controllers
         {
             return View();
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
@@ -62,10 +65,10 @@ namespace BethysPieShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Manually craete an IdenityUser
+                //Manually craete an IdenityUser.
                 var user = new IdentityUser() { UserName = loginViewModel.UserName };
                 var result = await _userManager.CreateAsync(user, loginViewModel.Password);
-                await _signInManager.SignInAsync(user, isPersistent: false); //signs in the user directly after registration.
+                await _signInManager.SignInAsync(user, isPersistent: false); //Signs in the user directly after registration.
                 if (result.Succeeded) //if all ok
                 {
                     return RedirectToAction("Index", "Home");
@@ -74,11 +77,40 @@ namespace BethysPieShop.Controllers
             return View(loginViewModel); //if not.
         }
 
-        [HttpPost]
+        //[HttpPost]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+
+
+
+        //[Route("signin")]
+
+        //public IActionResult SignIn() => View();
+
+
+
+        //[Route("signin/{provider}")]
+
+        //public IActionResult SignIn(string provider, string returnUrl = null) =>
+
+        //    Challenge(new AuthenticationProperties { RedirectUri = returnUrl ?? "/" }, provider);
+
+
+
+        //[Route("signout")]
+
+        //public async Task<IActionResult> SignOut()
+
+        //{
+
+        //    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+        //    return RedirectToAction("Index", "Home");
+
+        //}
     }
 }

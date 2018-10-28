@@ -2,6 +2,14 @@
 
 <h2>@Model.Title</h2>
 
+@if (User.Identity.IsAuthenticated)
+{
+    <h3>Welcome @User.Identity.Name</h3>
+} else
+{
+    <h3>You are not logged in.</h3>
+}
+
 @foreach (var pie in Model.Pies)
 {
     <div class="col-sm-4 col-lg-4 col-md-4">
