@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BethysPieShop.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,7 @@ namespace BethysPieShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddTransient<IPieRepository, MockPieRepository>(); //Whenever an IPieRepository is requested, give an MockPieRepository.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
