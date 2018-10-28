@@ -17,7 +17,7 @@ namespace BethysPieShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddTransient<IPieRepository, MockPieRepository>(); //Whenever an IPieRepository is requested, give an MockPieRepository.
+            services.AddTransient<IPieRepository, MockPieRepository>(); //Whenever an IPieRepository is requested, give an MockPieRepository transitively (new on every request).
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
