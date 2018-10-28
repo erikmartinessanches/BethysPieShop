@@ -21,5 +21,23 @@
         "umd/popper.min.js"
       ]
     }
+  ,
+{
+  "provider": "cdnjs",
+  "library": "normalize@8.0.0",
+  "destination": "wwwroot/lib/normalize/",
+  "files": [
+    "normalize.min.css"
   ]
+}
+,
+{
+  "provider": "cdnjs",
+  "library": "modernizr@2.8.3",
+  "destination": "wwwroot/lib/modernizr/",
+  "files": [
+    "modernizr.min.js"
+  ]
+}
+]
 }
