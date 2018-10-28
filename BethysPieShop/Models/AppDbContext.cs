@@ -16,5 +16,6 @@ namespace BethysPieShop.Models
 
         //Specify which types need to be a table (Pies) in the db.
         public DbSet<Pie> Pies { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
     }
 }
