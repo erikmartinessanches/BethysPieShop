@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebEssentials.AspNetCore.Pwa;
 
 namespace BethysPieShop
 {
@@ -31,6 +32,14 @@ namespace BethysPieShop
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //services.AddProgressiveWebApp(new PwaOptions
+            //{
+            //    CacheId = "v3",
+            //    RoutesToPreCache = "/, /Home/Details/1, /content/site.css, /images/bethanylogo.png, /lib/bootstrap/js/bootstrap.min.js, /lib/jquery/jquery.slim.min.js, /lib/popper.js/umd/popper.min.js, /favicon-32x32.png",
+            //    Strategy = ServiceWorkerStrategy.CacheFirst
+            //});
+
             services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -47,6 +56,7 @@ namespace BethysPieShop
             services.AddTransient<IPieRepository, PieRepository>(); //Whenever an IPieRepository is requested, give an MockPieRepository transitively (new on every request).
             services.AddTransient<IFeedbackRepository, FeedbackRepository>();
             services.AddMvc();
+
 
 
             services.AddHsts(options =>
@@ -79,6 +89,11 @@ namespace BethysPieShop
     //    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
     //})
     .AddCookie();
+
+
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
