@@ -8,6 +8,8 @@ namespace BethysPieShop.ViewModels
 {
     public class LoginViewModel
     {
+        public string ReturnUrl { get; set; }
+
         [Required]
         [Display(Name ="User Name")]
         public string UserName { get; set; }

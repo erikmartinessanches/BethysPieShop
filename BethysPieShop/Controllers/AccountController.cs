@@ -21,7 +21,7 @@ namespace BethysPieShop.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
             return View();
         }
