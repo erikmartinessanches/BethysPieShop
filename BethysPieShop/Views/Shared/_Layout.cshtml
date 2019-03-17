@@ -30,9 +30,8 @@
                     <li><a asp-controller="Home" asp-action="Index" class="navbar-brand">Bethany's Pie Shop</a></li>
 
                     <li><a asp-controller="Feedback" asp-action="Index">Feedback</a></li>
-
+                    <partial name="_LoginPartial" />
                 </ul>
-                @await Html.PartialAsync("LoginPartial")
             </div>
         </div>
     </nav>
@@ -42,5 +41,6 @@
                 @RenderBody()
         </div>
     </div>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

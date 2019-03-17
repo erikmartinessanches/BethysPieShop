@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BethysPieShop.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -32,22 +33,36 @@ namespace BethysPieShop
         {
 
 
-            services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
 
             /* Store the info using the AppDbContext. Using identity, we don't have to write quiries...
              * We're poining out the data store.
              */
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+            //services.AddIdentity<IdentityUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<AppDbContext>();
+
+
+
+            //services.AddDefaultIdentity<IdentityUser>()
+        //.AddDefaultUI(UIFramework.Bootstrap4)
+        //.AddEntityFrameworkStores<AppDbContext>();
+
+            //services.AddAuthentication().AddFacebook(facebookOptions =>
+            //{
+            //    facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+            //    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            //});
 
             services.AddTransient<IPieRepository, PieRepository>(); //Whenever an IPieRepository is requested, give an PieRepository transitively (new on every request).
             services.AddTransient<IFeedbackRepository, FeedbackRepository>();
 
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddMvc();
 
-            services.AddMemoryCache();
-            services.AddSession();
+            //services.AddMemoryCache();
+            //services.AddSession();
 
 
             //Lessens the nonalphanumeric password requirement that caused an 
