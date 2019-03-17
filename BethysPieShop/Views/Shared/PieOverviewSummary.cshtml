@@ -1,0 +1,12 @@
+﻿@model Pie
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="@Model.ImageThumbnailUrl" alt="A pie." />
+        <div class="caption">
+            <h3 class="pull-right">@Model.Price.ToString("c")</h3> <!--Format as currency.-->
+            <h3><a asp-controller="Home" asp-action="Details" asp-route-id="@Model.Id">@Model.Name</a></h3>
+            <p>@Model.ShortDescription</p>
+        </div>
+    </div>
+</div>

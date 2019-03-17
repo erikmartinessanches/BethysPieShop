@@ -27,6 +27,7 @@
             </div>
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    @await Component.InvokeAsync("ShoppingCartSummary")
                     <li><a asp-controller="Home" asp-action="Index" class="navbar-brand">Bethany's Pie Shop</a></li>
 
                     <li><a asp-controller="Feedback" asp-action="Index">Feedback</a></li>

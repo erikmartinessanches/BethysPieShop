@@ -44,8 +44,8 @@ namespace BethysPieShop
 
 
             //services.AddDefaultIdentity<IdentityUser>()
-        //.AddDefaultUI(UIFramework.Bootstrap4)
-        //.AddEntityFrameworkStores<AppDbContext>();
+            //.AddDefaultUI(UIFramework.Bootstrap4)
+            //.AddEntityFrameworkStores<AppDbContext>();
 
             //services.AddAuthentication().AddFacebook(facebookOptions =>
             //{
@@ -53,16 +53,22 @@ namespace BethysPieShop
             //    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             //});
 
-            services.AddTransient<IPieRepository, PieRepository>(); //Whenever an IPieRepository is requested, give an PieRepository transitively (new on every request).
-            services.AddTransient<IFeedbackRepository, FeedbackRepository>();
-
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<IPieRepository, PieRepository>(); //Whenever an IPieRepository is requested, give an PieRepository transitively (new on every request).
+            services.AddTransient<IFeedbackRepository, FeedbackRepository>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp)); //So that different people get different instances of a shopping cart (AddScoped)!
+
+
+
             services.AddMvc();
 
-            //services.AddMemoryCache();
-            //services.AddSession();
+            //I think these two will make the shopping cart work....
+            services.AddMemoryCache();
+            services.AddSession();
 
 
             //Lessens the nonalphanumeric password requirement that caused an 
@@ -93,7 +99,7 @@ namespace BethysPieShop
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseAuthentication();
-            //app.UseSession();
+            app.UseSession(); //"for shopping cart"
             //app.UseIdentity();
             app.UseMvc(routes =>
             {
