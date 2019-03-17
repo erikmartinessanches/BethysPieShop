@@ -35,7 +35,7 @@ namespace BethysPieShop
                 }
                 catch (Exception ex)
                 {
-                    //Wee would log this IRL.
+                    //We would log this IRL.
 
                 }
 

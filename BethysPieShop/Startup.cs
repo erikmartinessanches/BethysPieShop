@@ -41,7 +41,7 @@ namespace BethysPieShop
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
 
-            services.AddTransient<IPieRepository, PieRepository>(); //Whenever an IPieRepository is requested, give an MockPieRepository transitively (new on every request).
+            services.AddTransient<IPieRepository, PieRepository>(); //Whenever an IPieRepository is requested, give an PieRepository transitively (new on every request).
             services.AddTransient<IFeedbackRepository, FeedbackRepository>();
 
             services.AddMvc();
@@ -71,6 +71,7 @@ namespace BethysPieShop
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        //It appears that the request travels from top to bottom in the following middlewares:
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseDeveloperExceptionPage();
@@ -83,7 +84,7 @@ namespace BethysPieShop
             {
                 routes.MapRoute(
                     name:"default",
-                    template: "{controller=Home}/{Action=Index}/{id?}"
+                    template: "{controller=Home}/{action=Index}/{id?}"
                     );        
             }
             );
